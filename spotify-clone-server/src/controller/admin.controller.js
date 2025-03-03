@@ -60,3 +60,29 @@ export const createSong = async (req, res, next) => {
         next(error);
     }
 }
+
+
+export const deleteSong = async (req, res, next) => {
+    try{
+        const {id} = req.params;
+
+        const song = await Song.findById(id);  
+        if(!song){
+            return res.status(404).send('Song not found');
+        }
+
+
+       //if song has albumId, then remove song from album
+        if(song.albumId){
+            const album = await Album.findByIdAndUpdate(song.albumId, {
+                $pull:{songs:song._id},
+            });
+        }
+
+        await song.findByIdAndDelete(id);
+        res.status(200).send({message: 'Song deleted successfully'});
+    }catch(error){
+        console.error(error);
+        next(error);
+    }
+}
