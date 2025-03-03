@@ -6,7 +6,6 @@ export const protectRoute = async (req, res, next) => {
         res.status(401).json({error: 'Unauthorizedou - you must be logged in to access this resource'});
         return;
     }
-
     next();
 }
 
@@ -24,7 +23,7 @@ export const requireAdmin = async (req, res, next) => {
         next();
     }catch(error){
         console.error('Error in requireAdmin middleware', error);
-        res.status(500).json({error: 'Internal Server Error'});
+        next(error);
     }
 }
 
