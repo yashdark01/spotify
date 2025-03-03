@@ -1,32 +1,18 @@
 import {Router} from 'express';
-import {protectRoute} from '../middleware/auth.middleware.js';
+import { protectRoute } from '../middleware/auth.middleware.js';
+import { getAllUsers } from '../controller/user.controller.js';
+
 
 const router = Router();
 
-router.get('/like', protectRoute, (req, res) => {
-   
-    res.send('Hello This User Routes!');
-}
-);
+router.use(protectRoute);
 
-router.post('/', (req, res) => {
-    res.send('Hello This User Routes!');
-}
-);
+router.get('/', getAllUsers);
+// router.get('/:id', getUserById);
 
-router.put('/', (req, res) => {
-    res.send('Hello This User Routes!');
-}
-);
-
-router.delete('/', (req, res) => {
-    res.send('Hello This User Routes!');
-}
-);
-router.patch('/', (req, res) => {
-    res.send('Hello This User Routes!');
-}
-);
+// router.post('/', createUser);
+// router.put('/:id', updateUser);
+// router.delete('/:id', deleteUser);
 
 
 export default router;
