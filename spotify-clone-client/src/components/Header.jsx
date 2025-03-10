@@ -7,7 +7,7 @@ const Header = () => {
   const isAdmin = false;
   return (
     <div className="flex items-center justify-between p-4 sticky top-0 bg-zinc-900/75 backdrop-blur-md z-10 ">
-      <div className="flex gap-2 items-center">Spotify</div>
+      <div className="flex gap-2 items-center"><img src = "/spotify.png" alt="Spotify" className="size-9"/></div>
       <div>
         {isAdmin && (
           <Link to={"/admin"}>
@@ -16,12 +16,17 @@ const Header = () => {
           </Link>
         )}
         <SignedIn>
-          <Button
+        <SignOutButton>
+        <Button
             variant={"secondary"}
             className="w-full text-white border-zinc-200 h-11"
           >
-            <SignOutButton />
+            Sign Out
+            
           </Button>
+
+        </SignOutButton>
+         
         </SignedIn>
         <SignedOut>
           <SignInOAuthButtons />

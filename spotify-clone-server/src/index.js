@@ -35,7 +35,7 @@ app.use(fileUpload({
     limits: { fileSize: 12 * 1024 * 1024 },
 }));    
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
     res.send('Hello World!');
 });
 
