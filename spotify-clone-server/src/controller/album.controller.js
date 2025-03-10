@@ -1,9 +1,11 @@
 import { Album } from '../models/album.model.js';
 
 export const getAllAlbums = async (req, res, next) => {
+    console.log('get all albums');
     try{
         const albums = await Album.find();
         res.status(200).send(albums);
+        console.log(albums);
     }
     catch(error){
         console.error(error);

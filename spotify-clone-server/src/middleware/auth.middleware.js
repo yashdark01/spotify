@@ -2,10 +2,13 @@ import { clerkClient, clerkMiddleware, getAuth, requireAuth } from "@clerk/expre
 
 
 export const protectRoute = async (req, res, next) => {
+    console.log('protectRoute middleware called', req.auth.userId);
+
     if(!req.auth.userId){
         res.status(401).json({error: 'Unauthorized - you must be logged in to access this resource'});
         return;
     }
+    console.log('User is authenticated', req.auth.userId);
     next();
 }
 
