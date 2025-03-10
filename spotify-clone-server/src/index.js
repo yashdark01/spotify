@@ -19,7 +19,11 @@ dotenv.config();
 const app = express();
 const __dirname = path.resolve();
 
-app.use(cors());
+app.use(cors({
+    origin:'http://localhost:3000',
+    credentials: true,
+
+}));
 const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
@@ -34,7 +38,6 @@ app.use(fileUpload({
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
-
 
 app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);

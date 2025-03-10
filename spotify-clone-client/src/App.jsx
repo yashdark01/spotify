@@ -1,25 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 
-import Header from './components/Header'
-import Footer from './components/Footer'
-import PremiumPage from './pages/Premium'
-import ArtistList from './components/ArtistCard'
+import HomePage from "./pages/home/HomePage";
+import AuthCallbackPage from "./pages/auth-callback/AuthCallbackPage";
+import { AuthenticateWithRedirectCallback } from "@clerk/clerk-react";
+import MainLayout from "./layout/MainLayout";
+import Chat from "./pages/chat/ChatPage";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <>
-    <Header/>
-    <PremiumPage/>
-    <ArtistList/>
-     <h1 className=' text-9xl font-bold flex justify-center items-center'>Hello World</h1>
+      
+      <Routes>
+        <Route
+          path="/sso-callback"
+          element={
+            <AuthenticateWithRedirectCallback
+              signUpForceRedirectUrl={"/auth-callback"}
+            />
+          }
+        />
+        <Route path="/auth-callback" element={<AuthCallbackPage />} />
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/chat" element={<Chat/>} />
+        </Route>
+      </Routes>
 
-     <Footer/>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
