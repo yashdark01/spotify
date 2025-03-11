@@ -1,15 +1,20 @@
 import Header from '@/components/Header'
 import React from 'react'
-// import Header from '../../components/Header'
+
+
 const HomePage = () => {
+  
   return (
-    // <div><Header/></div>
-    <>
-    <Header/>
-     <div className='h-screen w-full flex justify-center items-center font-bold text-4xl  '>
-      this is home page
+   
+    <div className='rounded-lg overflow-hidden min-h-full'>
+       <Header/>
+       <div className='min-h-full h-96 flex justify-center items-center text-5xl font-bold'>
+
+          Home Page Loading.....
+
+       </div>
+
     </div>
-    </>
    
   )
 }

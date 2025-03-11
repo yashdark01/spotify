@@ -17,7 +17,10 @@ const uploadToCloudinary = async (file) => {
 }
 
 export const checkAdmin = (req, res, next) => {
-    res.status(200).send({admin: true});
+
+    console.log("admin");
+    res.status(200).json({admin: true});
+    console.log("check admin successfully");
 }
 
 export const createSong = async (req, res, next) => {

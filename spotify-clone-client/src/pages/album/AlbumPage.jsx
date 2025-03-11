@@ -2,16 +2,17 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchAlbumById } from "@/redux/playlistSlice";
-import PlaylistSkeleton from "@/components/skeletons/PlaylistSkeleton";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
-import { Clock, Play } from "lucide-react";
+import { Clock, Play, PlayIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import AlbumSkeleton from "@/components/skeletons/AlbumSkeleton";
+import { FaPlay } from "react-icons/fa";
 
 const formatDuration = (seconds) => {
-    const minutes = Math.floor(seconds/60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
-}
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
+  return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
+};
 
 const AlbumPage = () => {
   const { id } = useParams();
@@ -19,25 +20,21 @@ const AlbumPage = () => {
   const { album, loading } = useSelector((state) => state.albums);
 
   useEffect(() => {
-    console.log("Fetching album with ID:", id);
+    // console.log("Fetching album with ID:", id);
+    // console.log("Album data:", album);
     if (id) {
       dispatch(fetchAlbumById(id));
     }
   }, [id, dispatch]);
 
-  if (loading) {
-    return (
-      <div>
-        <PlaylistSkeleton />
-      </div>
-    );
-  }
-  return (
-    <div className="h-full">
-      <ScrollArea className="h-full">
-        <div className="relative min-h-full">
+  return loading || album === null ? (
+    <AlbumSkeleton />
+  ) : (
+    <div className="h-full ">
+      <ScrollArea className="h-full ">
+        <div className="relative min-h-full ">
           <div
-            className="absolute inset-0 bg-gradient-to-b from-[#5038a0] via-zinc-900/80 to-zinc-900 pointer-events-none"
+            className="absolute rounded-lg  inset-0 bg-gradient-to-b from-[#5038a0] via-zinc-900/80 to-zinc-900 pointer-events-none"
             aria-hidden="true"
           />
 
@@ -68,53 +65,60 @@ const AlbumPage = () => {
                 <Play className="h-7 w-7 text-black" />
               </Button>
             </div>
-            <div className=" bg-black/20 backdrop=blur-sm">
-              <div className="grid grid-cols-[16px_4fr_2fr_1fr] gap-4 px-10 py-2 text-sm text-zinc-400 border-b border-white/5">
-                <div>#</div>
-                <div>Title</div>
-                <div>Released Date</div>
-                <div>
-                  <Clock className="h-4 w-4" />
+            <div className="px-6">
+              <div className=" ">
+                <div className="grid grid-cols-[16px_4fr_2fr_1fr] gap-4 px-4 py-2 text-sm text-zinc-400 border-b border-white/5">
+                  <div>#</div>
+                  <div>Title</div>
+                  <div>Released Date</div>
+                  <div>
+                    <Clock className="h-4 w-4" />
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className="px-0">
-              <div className="space-y-2 py-4">
-                {album?.songs?.length > 0 ? (
-                  album.songs.map((song, index) => (
-                    <div
-                      key={song._id}
-                      className="grid grid-cols-[16px_4fr_2fr_1fr] gap-4 px-10 py-2 text-sm text-zinc-400 hover:bg-white/5 rounded-md group cursor-pointer"
-                    >
-                      <div className="flex items-center justify-center">
-                        <span className="group-hover:hidden">{index + 1}</span>
-                        <Play className="h-4 w-4 hidden group-hover:block" />
-                      </div>
+              <div className="px-0">
+                <div className="space-y-2 py-4">
+                  {album?.songs?.length > 0 ? (
+                    album.songs.map((song, index) => (
+                      <div
+                        key={song._id}
+                        className="grid grid-cols-[16px_4fr_2fr_1fr] gap-4 px-4 py-2 text-sm text-zinc-400 hover:bg-white/5 rounded-md group cursor-pointer"
+                      >
+                        <div className="flex items-center justify-center">
+                          <span className="group-hover:hidden">
+                            {index + 1}
+                          </span>
+                          <FaPlay className="h-3 w-3 hidden group-hover:block" />
+                        </div>
 
-                      <div className="flex items-center gap-3">
-                        <img
-                          src={song.imageUrl}
-                          alt={song.title}
-                          className="size-10 "
-                        />
-                        <div>
-                          <div className="font-medium text">{song.title}</div>
-                          <div className="text-xs text-zinc-400">
-                            {song.artist}
+                        <div className="flex items-center gap-3">
+                          <img
+                            src={song.imageUrl}
+                            alt={song.title}
+                            className="size-10 "
+                          />
+                          <div>
+                            <div className="font-medium text">{song.title}</div>
+                            <div className="text-xs text-zinc-400">
+                              {song.artist}
+                            </div>
                           </div>
                         </div>
+                        <div className="flex items-center">
+                          {song.createdAt.split("T")[0]}
+                        </div>
+                        <div className="flex items-center">
+                          {formatDuration(song.duration)}
+                        </div>
                       </div>
-                      <div className="flex items-center">{song.createdAt.split("T")[0]}</div>
-                      <div className="flex items-center">{formatDuration(song.duration)}</div>
-                    </div>
-                    
-                  ))
-                ) : (
-                  <p className="text-center text-zinc-400">
-                    No songs available
-                  </p>
-                )}
+                    ))
+                  ) : (
+                    <p className="text-center text-zinc-400">
+                      No songs available
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
           </div>
