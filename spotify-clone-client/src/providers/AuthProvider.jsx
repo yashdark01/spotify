@@ -1,8 +1,9 @@
-
 import { useAuth } from "@clerk/clerk-react";
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../lib/axios";
 import { Loader } from "lucide-react";
+import { useSelector, useDispatch } from "react-redux";
+import { checkAdminStatus } from "@/redux/authSlice";
 
 const updateApiToken = (token) => {
     if (token) {
@@ -15,12 +16,17 @@ const updateApiToken = (token) => {
 const AuthProvider = ({ children }) => {
     const { getToken } = useAuth();
     const [loading, setLoading] = useState(true);
+    // const {admin} = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const initAuth = async () => {
             try {
                 const token = await getToken();
                 updateApiToken(token);
+                if(token){
+                    dispatch(checkAdminStatus());
+                }
             } catch (error) {
                 updateApiToken(null);
                 console.error(error);

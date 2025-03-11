@@ -10,6 +10,6 @@ router.get('/', getAllSongs);
 router.get('/:id', getSongById);
 router.get('/featured', getFeaturedSongs);
 router.get('/made-for-you', getMadeForYouSongs);
-router.get('/treding', getTredingSongs);
+router.get('/trending', getTredingSongs);
 
 export default router;
