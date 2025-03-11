@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import PlaylistSkeleton from "../../components/skeletons/PlaylistSkeleton";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchAlbums } from "../../redux/albumSlice";
+import { fetchAlbums } from "../../redux/playlistSlice";
 import { useAuth } from "@clerk/clerk-react";
 
 const LeftSideBar = () => {
@@ -52,7 +52,7 @@ const LeftSideBar = () => {
               albums.map((album) => (
                 <Link
                   key={album._id}
-                  to={`/playlist/${album._id}`}
+                  to={`/albums/${album._id}`}
                   className="p-2 flex items-center gap-3 group cursor-pointer rounded-md hover:bg-zinc-800"
                 >
                     <img src={album.imageUrl} alt="Playlist Img" className="h-12 rounded-md flex-shrink-0 object-cover overflow-hidden"/>

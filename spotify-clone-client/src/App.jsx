@@ -6,6 +6,7 @@ import AuthCallbackPage from "./pages/auth-callback/AuthCallbackPage";
 import { AuthenticateWithRedirectCallback } from "@clerk/clerk-react";
 import MainLayout from "./layout/MainLayout";
 import Chat from "./pages/chat/ChatPage";
+import AlbumPage from "./pages/album/AlbumPage";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -26,6 +27,7 @@ function App() {
         <Route element={<MainLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/chat" element={<Chat/>} />
+          <Route path="/albums/:id" element={<AlbumPage/>} />
         </Route>
       </Routes>
 

@@ -14,7 +14,6 @@ const router = Router();
 
 
 router.use(protectRoute, requireAdmin);
-
 router.get('/check', checkAdmin);
 
 router.post('/songs', createSong);
