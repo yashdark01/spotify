@@ -20,7 +20,7 @@ export const checkAdmin = (req, res, next) => {
 
     console.log("admin");
     res.status(200).json({admin: true});
-    console.log("check admin successfully");
+    // console.log("check admin successfully");
 }
 
 export const createSong = async (req, res, next) => {

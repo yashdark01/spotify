@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchAlbumById } from "@/redux/playlistSlice";
-import { ScrollArea } from "@radix-ui/react-scroll-area";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Clock, Play, PlayIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AlbumSkeleton from "@/components/skeletons/AlbumSkeleton";
@@ -17,7 +17,7 @@ const formatDuration = (seconds) => {
 const AlbumPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { album, loading } = useSelector((state) => state.albums);
+  const { album, albumLoading } = useSelector((state) => state.playlists);
 
   useEffect(() => {
     // console.log("Fetching album with ID:", id);
@@ -27,14 +27,19 @@ const AlbumPage = () => {
     }
   }, [id, dispatch]);
 
-  return loading || album === null ? (
-    <AlbumSkeleton />
-  ) : (
-    <div className="h-full ">
-      <ScrollArea className="h-full ">
-        <div className="relative min-h-full ">
+  if(albumLoading || !album || album.length < 1)
+  {
+    return <AlbumSkeleton/>
+  }
+  
+
+  return (
+    <div className="min-h-full  ">
+      <ScrollArea className="min-h-full ">
+        <div className="relative min-h-screen ">
           <div
-            className="absolute rounded-lg  inset-0 bg-gradient-to-b from-[#5038a0] via-zinc-900/80 to-zinc-900 pointer-events-none"
+            className="absolute inset-0 min-h-full rounded-lg bg-gradient-to-b from-[#5038a0]/80 via-zinc-900/80
+					 to-zinc-900 pointer-events-none"
             aria-hidden="true"
           />
 

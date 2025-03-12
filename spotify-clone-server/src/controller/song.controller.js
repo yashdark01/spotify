@@ -21,7 +21,7 @@ export const getSongById = async (req, res, next) => {
       return res.status(404).send("Song not found");
     }
     res.status(200).send(song);
-  } catch {
+  } catch(error) {
     console.error(error);
     next(error);
   }
@@ -29,23 +29,31 @@ export const getSongById = async (req, res, next) => {
 
 export const getFeaturedSongs = async (req, res, next) => {
   try {
-    // get 6 random songs from the database and send them to the client as a response using aggregate pipeline
+    console.log("Fetching featured songs...");
+
     const songs = await Song.aggregate([
       { $sample: { size: 6 } },
       {
         $project: {
+          _id: 1,
           title: 1,
           artist: 1,
           imageUrl: 1,
           audioUrl: 1,
-          duration: 1,
         },
       },
     ]);
-    res.status(200).send(songs);
+
+    console.log("Featured songs retrieved:", songs.length, "songs found.");
+
+    if (!songs || songs.length === 0) {
+      return res.status(200).json({ message: "No songs found", songs: [] });
+    }
+
+    res.status(200).json(songs);
   } catch (error) {
-    console.error(error);
-    next(error);
+    console.error("Error fetching featured songs:", error);
+    res.status(500).json({ message: "Server error while fetching songs", error: error.message });
   }
 };
 

@@ -3,7 +3,7 @@ import { HeadphonesIcon, Music, User, Users } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUsers } from "../../redux/userSlice";
 import { useUser } from "@clerk/clerk-react";
-import { ScrollArea } from "@radix-ui/react-scroll-area";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 
 const LoginPrompt = () => (

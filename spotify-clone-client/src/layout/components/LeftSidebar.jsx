@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from "react";
-import { ScrollArea } from "@radix-ui/react-scroll-area";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { HomeIcon, Library, MessageCircleIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import PlaylistSkeleton from "../../components/skeletons/PlaylistSkeleton";
@@ -9,7 +9,7 @@ import { useAuth } from "@clerk/clerk-react";
 
 const LeftSideBar = React.memo(({ panelSize }) => {
   const dispatch = useDispatch();
-  const { albums, loading } = useSelector((state) => state.albums);
+  const { albums, albumsLoading } = useSelector((state) => state.playlists);
   const { userId } = useAuth();
 
   useEffect(() => {
@@ -79,7 +79,7 @@ const LeftSideBar = React.memo(({ panelSize }) => {
 
         <ScrollArea className="h-[calc(100vh-300px)]">
           <div className="space-y-2">
-            {loading || !userId ? <PlaylistSkeleton /> : albumLinks}
+            {albumsLoading || !userId ? <PlaylistSkeleton /> : albumLinks}
           </div>
         </ScrollArea>
       </div>
