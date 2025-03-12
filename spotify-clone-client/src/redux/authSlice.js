@@ -6,8 +6,6 @@ export const checkAdminStatus = createAsyncThunk(
     async (_, { rejectWithValue }) => {
         try {
             const response = await axiosInstance.get('/admin/check');
-            console.log("response", response.data);  // Fix: Directly use response.data
-            console.log("data.admin", response.data.admin);
             return response.data.admin;
         } catch (error) {
             console.error("Admin check error:", error.response?.data || error.message);

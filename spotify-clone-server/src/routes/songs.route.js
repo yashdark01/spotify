@@ -7,9 +7,9 @@ const router = Router();
 router.use(protectRoute);
 
 router.get('/', getAllSongs);
-router.get('/:id', getSongById);
 router.get('/featured', getFeaturedSongs);
 router.get('/made-for-you', getMadeForYouSongs);
 router.get('/trending', getTredingSongs);
+router.get('/:id', getSongById);
 
 export default router;
