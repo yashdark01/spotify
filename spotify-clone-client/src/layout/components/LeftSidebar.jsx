@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from "react";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { HomeIcon, Library, MessageCircleIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import PlaylistSkeleton from "../../components/skeletons/PlaylistSkeleton";
