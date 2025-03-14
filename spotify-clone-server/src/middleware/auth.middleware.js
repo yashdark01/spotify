@@ -11,7 +11,7 @@ export const protectRoute = async (req, res, next) => {
             return res.status(401).json({ error: 'Unauthorized - You must be logged in to access this resource' });
         }
 
-        req.userId = userId;  // Store userId for next middleware/routes
+        req.userId = userId;
         next();
 
     } catch (error) {

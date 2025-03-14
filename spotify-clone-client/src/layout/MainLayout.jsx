@@ -8,6 +8,7 @@ import LeftSideBar from "./components/LeftSideBar";
 import FriendsActivity from "./components/RightSidebar";
 import { useEffect, useMemo, useState } from "react";
 import AudioPlayer from "./components/AudioPlayer";
+import PlaybackControl from "./components/PlaybackControls";
 
 const MainLayout = () => {
   const isMobile = useMemo(() => window.innerWidth <= 768, []);
@@ -44,6 +45,7 @@ const MainLayout = () => {
         </ResizablePanel>
         <ResizableHandle className="w-2 bg-black rounded-lg transition-colors" />
       </ResizablePanelGroup>
+      <PlaybackControl/>
     </div>
     
   );
