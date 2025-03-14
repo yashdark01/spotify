@@ -16,6 +16,7 @@ export const fetchAlbums = createAsyncThunk(
 export const fetchAlbumById = createAsyncThunk(
   "albums/fetchAlbumById", 
   async (id, { rejectWithValue }) => {
+    console.log("fetchAlbumById", id);
     try {
       const response = await axiosInstance.get(`/albums/${id}`);
       return response.data;

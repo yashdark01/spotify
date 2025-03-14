@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchFeaturedSongs } from "@/redux/playlistSlice";
 import FeaturedSkeleton from "@/components/skeletons/FeaturedSkeleton";
-// import { PlayButton } from "@/components/PlayButton";
+import PlayButton from "./PlayButton";
 
 const FeaturedSection = () => {
     const { featuredSong, featuredSongLoading, error } = useSelector((state) => state.playlists);
@@ -30,11 +30,11 @@ const FeaturedSection = () => {
                         alt={song.title}
                         className="w-16 sm:w-20 h-16 sm:h-20 object-cover flex-shrink-0"
                     />
-                    <div className="flex-1 p-4">
+                    <div className="flex-1 p-3">
                         <p className="font-medium truncate">{song.title}</p>
                         <p className="text-sm text-zinc-400 truncate">{song.artist}</p>
                     </div>
-                    {/* <PlayButton song={song} /> */}
+                    <PlayButton song={song} />
                 </div>
             ))}
         </div>

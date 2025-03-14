@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import {clerkMiddleware} from '@clerk/express';
+import {clerkMiddleware, getAuth} from '@clerk/express';
 import { connectDB } from './lib/db.js';
 import fileUpload from 'express-fileupload';
 import path from 'path';
@@ -12,7 +12,7 @@ import  adminRoutes from './routes/admin.route.js';
 import songsRoutes from './routes/songs.route.js';
 import albumsRoutes from './routes/albums.route.js';
 import statsRoutes from './routes/stats.route.js';
-import { error } from 'console';
+
 
 dotenv.config();
 
@@ -28,6 +28,20 @@ const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
 app.use(clerkMiddleware());
+// app.use(withAuth)
+app.use((req, res, next) => {
+    const { userId, sessionClaims } = getAuth(req);
+
+    if (!userId) {
+        console.log("User is not authenticated");
+        return res.status(401).json({ error: "Unauthorized - Token expired or invalid" });
+    }
+
+    console.log("User is authenticated", userId);
+    console.log("Session claims:", sessionClaims);  
+
+    next();
+});
 app.use(fileUpload({
     useTempFiles : true,
     tempFileDir : path.join(__dirname, 'tmp'),
