@@ -40,23 +40,23 @@ const playerSlice = createSlice({
       state.isPlaying = !state.isPlaying;
     },
     setPlayNextSong: (state) => {
-      if (state.queue.length === 0) return;
-      const nextIndex = state.currentIndex + 1;
-      if (nextIndex < state.queue.length) {
+        if (state.queue.length === 0) return;
+      
+        const nextIndex = (state.currentIndex + 1) % state.queue.length;
         state.currentIndex = nextIndex;
         state.currentSong = state.queue[nextIndex];
         state.isPlaying = true;
-      }
-    },
-    setPlayPreviousSong: (state) => {
-      if (state.queue.length === 0) return;
-      const prevIndex = state.currentIndex - 1;
-      if (prevIndex >= 0) {
+      },
+      
+      setPlayPreviousSong: (state) => {
+        if (state.queue.length === 0) return;
+      
+        const prevIndex =
+          state.currentIndex === 0 ? state.queue.length - 1 : state.currentIndex - 1; 
         state.currentIndex = prevIndex;
         state.currentSong = state.queue[prevIndex];
         state.isPlaying = true;
-      }
-    },
+      },
     setPlayerVisibility: (state, action) => {
       state.isPlayer = action.payload;
     },
