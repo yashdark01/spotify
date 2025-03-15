@@ -9,10 +9,23 @@ import FriendsActivity from "./components/RightSidebar";
 import { useEffect, useMemo, useState } from "react";
 import AudioPlayer from "./components/AudioPlayer";
 import PlaybackControl from "./components/PlaybackControls";
+import { useSelector, useDispatch } from "react-redux";
+import { setPlayerVisibility } from "@/redux/playerSlice";
 
 const MainLayout = () => {
   const isMobile = useMemo(() => window.innerWidth <= 768, []);
   const [panelSize, setPanelSize] = useState(20);
+
+  const {isPlaying, isPlayer} = useSelector((state) => state.player);
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    if(isPlaying && !isPlayer){
+      dispatch(setPlayerVisibility(true));
+    }
+
+  }, [isPlaying, dispatch]);
+
   return (
     <div className="h-screen w-full flex flex-col justify-center items-center bg-black">
       <ResizablePanelGroup
@@ -43,9 +56,12 @@ const MainLayout = () => {
         <ResizablePanel defaultSize={20} minSize={0} maxSize={25}>
           <FriendsActivity />
         </ResizablePanel>
-        <ResizableHandle className="w-2 bg-black rounded-lg transition-colors" />
+        
       </ResizablePanelGroup>
-      <PlaybackControl/>
+      <div className={` ${isPlayer ? "flex opacity-100 translate-y-0" :  "hidden translate-y-24 "} w-full h-auto transition-all duration-700`}>
+        <PlaybackControl/>
+      </div>
+      
     </div>
     
   );

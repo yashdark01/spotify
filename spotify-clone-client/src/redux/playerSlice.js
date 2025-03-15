@@ -19,6 +19,7 @@ const playerSlice = createSlice({
       currentSong: {},
       queue: [], // ✅ Ensure queue is initialized as an array
       isPlaying: false,
+      isPlayer:false,
       currentIndex: -1,
       loading: false,
       error: null,
@@ -56,6 +57,9 @@ const playerSlice = createSlice({
         state.isPlaying = true;
       }
     },
+    setPlayerVisibility: (state, action) => {
+      state.isPlayer = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -76,6 +80,6 @@ const playerSlice = createSlice({
   },
 });
 
-export const { setPlayerState, setCurrentSong, setPlayNextSong, setTogglePlay, setPlayPreviousSong } = playerSlice.actions;
+export const { setPlayerState, setCurrentSong, setPlayNextSong, setTogglePlay, setPlayPreviousSong, setPlayerVisibility } = playerSlice.actions;
 
 export default playerSlice.reducer;
