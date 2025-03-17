@@ -10,6 +10,7 @@ import { axiosInstance } from '@/lib/axios';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+
 const AuthCallbackPage = () => {
   const {isLoaded, user} = useUser(); 
   const syncAttempted = useRef(false);
@@ -52,11 +53,12 @@ const AuthCallbackPage = () => {
   }, [isLoaded, user, navigate]);
   return (
     <div className="h-screen w-full flex justify-center items-center">
-      <Card className="w-[80%] max-w-md bg-zinc-900 border-zinc-800 flex justify-center items-center">
+      <Loader className="siz-6 text-emerald-700 animate-spin" />
+      {/* <Card className="w-[80%] max-w-md bg-zinc-900 border-zinc-800 flex justify-center items-center">
           <Loader className="siz-6 text-emerald-700 animate-spin" />
           <h3 className="text-zinc-400 text-xl">Loading</h3>
           <p className="text-zinc-400 text-sm">Redirecting...</p>
-      </Card>
+      </Card> */}
     </div>
   );
 };
