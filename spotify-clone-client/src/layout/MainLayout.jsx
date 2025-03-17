@@ -6,25 +6,36 @@ import {
 import { Outlet } from "react-router-dom";
 import LeftSideBar from "./components/LeftSideBar";
 import FriendsActivity from "./components/RightSidebar";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import AudioPlayer from "./components/AudioPlayer";
 import PlaybackControl from "./components/PlaybackControls";
 import { useSelector, useDispatch } from "react-redux";
 import { setPlayerVisibility } from "@/redux/playerSlice";
+import { useAuth } from "@clerk/clerk-react";
 
 const MainLayout = () => {
-  const isMobile = useMemo(() => window.innerWidth <= 768, []);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [panelSize, setPanelSize] = useState(20);
 
-  const {isPlaying, isPlayer} = useSelector((state) => state.player);
+  const { isPlaying, isPlayer } = useSelector((state) => state.player);
   const dispatch = useDispatch();
+  const { userId } = useAuth();
 
-  useEffect(()=>{
-    if(isPlaying && !isPlayer){
+  useEffect(() => {
+    // Update `isMobile` on window resize
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (isPlaying && !isPlayer) {
       dispatch(setPlayerVisibility(true));
     }
-
-  }, [isPlaying, dispatch]);
+  }, [isPlaying, isPlayer, dispatch]);
 
   return (
     <div className="h-screen w-full flex flex-col justify-center items-center bg-black">
@@ -33,37 +44,47 @@ const MainLayout = () => {
         className="flex-1 flex h-full overflow-hidden p-2"
       >
         <AudioPlayer />
-        {/* Left Sidebar */}
-        <ResizablePanel
-          defaultSize={20}
-          minSize={isMobile ? 0 : 7}
-          maxSize={22}
-          onResize={setPanelSize} 
-        >
-          <LeftSideBar panelSize={panelSize} />
-        </ResizablePanel>
 
-        <ResizableHandle className="w-2 bg-black rounded-lg transition-colors" />
+        {/* Left Sidebar */}
+        {userId && <>
+          <ResizablePanel
+            defaultSize={20}
+            minSize={isMobile ? 0 : 7}
+            maxSize={22}
+            onResize={setPanelSize}
+          >
+            <LeftSideBar panelSize={panelSize} />
+           
+          </ResizablePanel>
+           <ResizableHandle className="w-2 bg-black rounded-lg transition-colors" />
+           </>
+        }
 
         {/* Main Content */}
         <ResizablePanel defaultSize={isMobile ? 80 : 60}>
           <Outlet />
         </ResizablePanel>
 
-        <ResizableHandle className="w-2 bg-black rounded-lg transition-colors" />
-
         {/* Right Sidebar */}
-        <ResizablePanel defaultSize={20} minSize={0} maxSize={25}>
-          <FriendsActivity />
-        </ResizablePanel>
-        
+        {userId && (
+          <>
+            <ResizableHandle className="w-2 bg-black rounded-lg transition-colors" />
+            <ResizablePanel defaultSize={20} minSize={0} maxSize={25}>
+              <FriendsActivity />
+            </ResizablePanel>
+          </>
+        )}
       </ResizablePanelGroup>
-      <div className={` ${isPlayer ? "flex opacity-100 translate-y-0" :  "hidden translate-y-24 "} w-full h-auto transition-all duration-700`}>
-        <PlaybackControl/>
+
+      {/* Playback Controls */}
+      <div
+        className={`${
+          isPlayer ? "flex opacity-100 translate-y-0" : "hidden translate-y-24"
+        } w-full h-auto transition-all duration-700`}
+      >
+        <PlaybackControl />
       </div>
-      
     </div>
-    
   );
 };
 
