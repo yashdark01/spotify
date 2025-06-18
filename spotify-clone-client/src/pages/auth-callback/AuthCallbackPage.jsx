@@ -22,7 +22,7 @@ const AuthCallbackPage = () => {
       try{
         if(!isLoaded || !user || syncAttempted.current) return;
 
-        // console.log("Syncing user with user data : ",  user.id, user.firstName, user.lastName, user.imageUrl);
+        console.log("Syncing user with user data : ",  user.id, user.firstName, user.lastName, user.imageUrl);
         try{
           const response = await axiosInstance.post("/auth/callback", {
             id: user.id,

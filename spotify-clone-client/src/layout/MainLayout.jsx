@@ -22,7 +22,6 @@ const MainLayout = () => {
   const { userId } = useAuth();
 
   useEffect(() => {
-    // Update `isMobile` on window resize
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };

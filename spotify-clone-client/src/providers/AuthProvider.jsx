@@ -17,12 +17,12 @@ const AuthProvider = ({ children }) => {
     const { getToken, session } = useAuth();
     const [loading, setLoading] = useState(true);
     const dispatch = useDispatch();
-    const tokenRefreshTimeout = useRef(null); // Store timeout in useRef
+    const tokenRefreshTimeout = useRef(null);
 
     useEffect(() => {
         const initAuth = async () => {
             try {
-                const token = await getToken();
+                const token = await getToken({ template: "testing-template" });
                 console.log("Token:", token);
                 updateApiToken(token);
 
@@ -30,11 +30,9 @@ const AuthProvider = ({ children }) => {
                     dispatch(checkAdminStatus());
                 }
 
-                // Set up token refresh logic
                 if (session?.expiresAt) {
                     const expiresAt = new Date(session.expiresAt).getTime();
-                    const currentTime = Date.now();
-                    const refreshTime = expiresAt - currentTime - 60000; // 1 min before expiry
+                    const refreshTime = expiresAt - Date.now() - 60000;
 
                     if (refreshTime > 0) {
                         tokenRefreshTimeout.current = setTimeout(initAuth, refreshTime);
@@ -50,12 +48,8 @@ const AuthProvider = ({ children }) => {
 
         initAuth();
 
-        return () => {
-            if (tokenRefreshTimeout.current) {
-                clearTimeout(tokenRefreshTimeout.current);
-            }
-        };
-    }, [getToken, session, dispatch]);
+        return () => clearTimeout(tokenRefreshTimeout.current);
+    }, [getToken, session?.expiresAt, dispatch]);
 
     if (loading) {
         return (
