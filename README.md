@@ -34,8 +34,8 @@ Full-stack music streaming application with Clerk authentication, MongoDB, Redux
 
 ```
 spotify/                      # repo name (GitHub: yashdark01/spotify)
-├── music-player-client/      # React + Vite frontend (port 3000)
-├── music-player-server/      # Express API (port 3001)
+├── client/      # React + Vite frontend (port 3000)
+├── server/      # Express API (port 3001)
 └── docs/
     ├── SETUP.md
     ├── API.md
@@ -51,7 +51,7 @@ git clone https://github.com/yashdark01/spotify.git
 cd spotify
 
 # Server
-cd music-player-server
+cd server
 cp .env.example .env   # fill in keys
 npm install
 npm run dev
@@ -60,7 +60,7 @@ npm run dev
 npm run seed
 
 # Client (new terminal)
-cd ../music-player-client
+cd ../client
 cp .env.example .env
 npm install
 npm run dev
@@ -85,7 +85,7 @@ Full setup: [docs/SETUP.md](./docs/SETUP.md)
 
 ## Scripts
 
-### Client (`music-player-client`)
+### Client (`client`)
 
 | Command | Description |
 |---------|-------------|
@@ -93,7 +93,7 @@ Full setup: [docs/SETUP.md](./docs/SETUP.md)
 | `npm run build` | Production build |
 | `npm run lint` | ESLint |
 
-### Server (`music-player-server`)
+### Server (`server`)
 
 | Command | Description |
 |---------|-------------|

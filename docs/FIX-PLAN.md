@@ -26,7 +26,7 @@ Audit of breakable functionality in client and server, with a phased fix roadmap
 
 ### 1.1 Global auth middleware blocks public routes
 
-**File:** `music-player-server/src/index.js`
+**File:** `server/src/index.js`
 
 **Problem:** Lines 32–44 require Clerk auth on **every** request, including `GET /api` health check and potential races with `/api/auth/callback`.
 
@@ -39,7 +39,7 @@ Audit of breakable functionality in client and server, with a phased fix roadmap
 
 ### 1.2 `deleteSong` / `deleteAlbum` never delete
 
-**File:** `music-player-server/src/controller/admin.controller.js`
+**File:** `server/src/controller/admin.controller.js`
 
 **Problem:** `await song.findByIdAndDelete(id)` — instance method, not Model.
 
@@ -77,7 +77,7 @@ Audit of breakable functionality in client and server, with a phased fix roadmap
 
 ### 2.2 HomePage fetch logic broken
 
-**File:** `music-player-client/src/pages/home/HomePage.jsx`
+**File:** `client/src/pages/home/HomePage.jsx`
 
 **Problem:** Both effects gate on `madeForYouSongs.length`; trending never fetches correctly.
 
@@ -87,7 +87,7 @@ Audit of breakable functionality in client and server, with a phased fix roadmap
 
 ### 2.3 Hardcoded API URL
 
-**File:** `music-player-client/src/lib/axios.jsx`
+**File:** `client/src/lib/axios.jsx`
 
 **Fix:** `import.meta.env.VITE_API_URL ?? 'http://localhost:3001/api'`
 

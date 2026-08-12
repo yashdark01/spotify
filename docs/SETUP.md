@@ -47,7 +47,7 @@ The client uses:
 mongodb+srv://<user>:<password>@cluster.mongodb.net/music-player?retryWrites=true&w=majority
 ```
 
-Set as `MONGODB_URI` in `music-player-clone-server/.env`.
+Set as `MONGODB_URI` in `server/.env`.
 
 ---
 
@@ -70,7 +70,7 @@ Admin uploads land in folder `music-player/` on Cloudinary.
 ## 5. Server setup
 
 ```bash
-cd music-player-clone-server
+cd server
 cp .env.example .env
 ```
 
@@ -110,7 +110,7 @@ This clears existing songs/albums and inserts 14 tracks + 4 albums referencing c
 ## 6. Client setup
 
 ```bash
-cd music-player-clone-client
+cd client
 cp .env.example .env
 ```
 
@@ -139,7 +139,7 @@ The server allows:
 origin: 'http://localhost:3000'
 ```
 
-For production, update `cors` in `music-player-clone-server/src/index.js` to your deployed frontend URL and set the client `axiosInstance` base URL in `src/lib/axios.jsx`.
+For production, update `cors` in `server/src/index.js` to your deployed frontend URL and set the client `axiosInstance` base URL in `src/lib/axios.jsx`.
 
 ---
 
