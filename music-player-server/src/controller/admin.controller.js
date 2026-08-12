@@ -6,7 +6,7 @@ import cloudinary from '../lib/cloudinary.js';
 const uploadToCloudinary = async (file) => {
     try{
         const result = await cloudinary.uploader.upload(file.tempFilePath, {
-            folder: 'spotify-clone',
+            folder: 'music-player',
             resource_type: 'auto',
         });
         return result.secure_url;

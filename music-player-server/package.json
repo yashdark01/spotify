@@ -1,5 +1,5 @@
 {
-  "name": "spotify-clone-server",
+  "name": "music-player-server",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "type": "module",
-  "description": "Express API for Spotify-style music streaming — MongoDB, Clerk auth, Cloudinary uploads",
+  "description": "Express API for Music Player — MongoDB, Clerk auth, Cloudinary uploads",
   "dependencies": {
     "@clerk/clerk-sdk-node": "^4.13.23",
     "@clerk/express": "^1.3.50",
