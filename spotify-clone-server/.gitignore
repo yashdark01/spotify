@@ -1,5 +1,27 @@
+# Dependencies
 node_modules/
+
+# Environment — copy .env.example to .env
 .env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+!.env.example
+
+# Upload temp files (express-fileupload)
 tmp/
+
+# Logs
+logs/
 *.log
+npm-debug.log*
+
+# OS
 .DS_Store
+
+# Coverage
+coverage/
+
+# Cache
+.eslintcache
