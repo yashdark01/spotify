@@ -23,7 +23,6 @@ const AuthProvider = ({ children }) => {
         const initAuth = async () => {
             try {
                 const token = await getToken();
-                console.log("Token:", token);
                 updateApiToken(token);
 
                 if (token) {

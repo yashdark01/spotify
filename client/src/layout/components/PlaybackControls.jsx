@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setPlayNextSong, setPlayerState, setTogglePlay, setPlayPreviousSong } from "@/redux/playerSlice";
+import { setPlayNextSong, setTogglePlay, setPlayPreviousSong } from "@/redux/playerSlice";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Shuffle, SkipBack, Play, Pause, SkipForward, Repeat, ListMusic, Mic2, Laptop2, Volume1 } from "lucide-react";
@@ -13,7 +13,7 @@ const formatDuration = (seconds) => {
   return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
 };
 const PlaybackControl = () => {
-  const { currentSong, queue, isPlaying, currentIndex } = useSelector(
+  const { currentSong, isPlaying } = useSelector(
     (state) => state.player
   );
   const dispatch = useDispatch();
@@ -30,45 +30,15 @@ const PlaybackControl = () => {
 
     const updateTime = () => setCurrentTime(audio.currentTime);
     const updateDuration = () => setDuration(audio.duration);
-    
-    const handleEnded = () => {
-      if (currentIndex === queue.length - 1) {
-        dispatch(setPlayerState({ isPlaying: false }));
-      } else {
-        dispatch(setPlayNextSong());
-      }
-    };
 
     audio.addEventListener("timeupdate", updateTime);
     audio.addEventListener("loadedmetadata", updateDuration);
-    audio.addEventListener("ended", handleEnded);
 
     return () => {
       audio.removeEventListener("timeupdate", updateTime);
       audio.removeEventListener("loadedmetadata", updateDuration);
-      audio.removeEventListener("ended", handleEnded);
     };
   }, [currentSong]);
-
-  useEffect(() => {
-    if (audioRef.current && currentSong) {
-      audioRef.current.src = currentSong.audioUrl;
-      audioRef.current.load();
-      if (isPlaying) {
-        audioRef.current.play();
-      }
-    }
-  }, [currentSong]);
-
-  useEffect(() => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.play();
-      } else {
-        audioRef.current.pause();
-      }
-    }
-  }, [isPlaying]);
 
   const handleSeek = (value) => {
     if (audioRef.current) {

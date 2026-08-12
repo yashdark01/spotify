@@ -29,8 +29,6 @@ export const getSongById = async (req, res, next) => {
 
 export const getFeaturedSongs = async (req, res, next) => {
   try {
-    console.log("Fetching featured songs...");
-
     const songs = await Song.aggregate([
       { $sample: { size: 6 } },
       {
@@ -43,8 +41,6 @@ export const getFeaturedSongs = async (req, res, next) => {
         },
       },
     ]);
-
-    console.log("Featured songs retrieved:", songs.length, "songs found.");
 
     if (!songs || songs.length === 0) {
       return res.status(200).json({ message: "No songs found", songs: [] });

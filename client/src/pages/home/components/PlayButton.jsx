@@ -13,7 +13,7 @@ const PlayButton = ({song}) => {
 
     const handlePlay = () => {
         if(isCurrentSong) dispatch(setTogglePlay());
-        else dispatch(setPlayerState({currentSong: song, queue: [song], isPlaying: true}));
+        else dispatch(setPlayerState({ currentSong: song, queue: [song], currentIndex: 0, isPlaying: true }));
     }
   return <Button
   onClick={handlePlay}

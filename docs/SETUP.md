@@ -131,15 +131,21 @@ Open **http://localhost:3000**, sign in with Clerk, and browse music.
 
 ---
 
-## 7. CORS
+## 7. CORS & API URL
 
-The server allows:
+**Server** — set comma-separated frontend URLs in `server/.env`:
 
-```js
-origin: 'http://localhost:3000'
+```env
+CLIENT_URL=http://localhost:3000,https://your-app.vercel.app
 ```
 
-For production, update `cors` in `server/src/index.js` to your deployed frontend URL and set the client `axiosInstance` base URL in `src/lib/axios.jsx`.
+**Client** — set the API base URL in `client/.env`:
+
+```env
+VITE_API_URL=http://localhost:3001/api
+```
+
+For production, point `VITE_API_URL` at your deployed API (e.g. Railway/Render) and add that frontend URL to `CLIENT_URL`.
 
 ---
 

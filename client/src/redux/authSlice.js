@@ -2,7 +2,7 @@ import { axiosInstance } from "@/lib/axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const checkAdminStatus = createAsyncThunk(
-    'usersjd/checkAdminStatus',
+    'auth/checkAdminStatus',
     async (_, { rejectWithValue }) => {
         try {
             const response = await axiosInstance.get('/admin/check');

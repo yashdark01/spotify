@@ -23,6 +23,14 @@ const FeaturedSection = () => {
     );
   }
 
+    if (!featuredSong.length) {
+      return (
+        <p className="mb-8 text-center text-sm text-zinc-400">
+          No featured songs yet. Run <code className="text-zinc-300">npm run seed</code> in the server folder.
+        </p>
+      );
+    }
+
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-4 mb-8">
             {featuredSong.map((song) => (

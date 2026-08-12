@@ -49,10 +49,10 @@ export default function AdminDashboard() {
 
       <div className="flex flex-wrap gap-3">
         <Button asChild>
-          <Link to="/admin/songs">Upload song</Link>
+          <Link to="/admin/songs">Manage songs</Link>
         </Button>
         <Button asChild variant="secondary">
-          <Link to="/admin/albums">Upload album</Link>
+          <Link to="/admin/albums">Manage albums</Link>
         </Button>
       </div>
     </div>

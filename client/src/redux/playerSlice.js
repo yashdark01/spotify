@@ -41,8 +41,13 @@ const playerSlice = createSlice({
     },
     setPlayNextSong: (state) => {
         if (state.queue.length === 0) return;
-      
-        const nextIndex = (state.currentIndex + 1) % state.queue.length;
+
+        if (state.currentIndex >= state.queue.length - 1) {
+          state.isPlaying = false;
+          return;
+        }
+
+        const nextIndex = state.currentIndex + 1;
         state.currentIndex = nextIndex;
         state.currentSong = state.queue[nextIndex];
         state.isPlaying = true;
