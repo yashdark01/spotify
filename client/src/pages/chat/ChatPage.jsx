@@ -28,8 +28,11 @@ const Chat = () => {
     <main className='rounded-md overflow-hidden h-screen bg-gradient-to-b from-zinc-800 to-zinc-900'>
     <Header/>
     <div className={`flex flex-col  max-h-screen max-w-4xl mx-auto p-5 ${isPlayer ? "min-h-[80%] h-auto" : " h-[75%]"}`}>
-      <div className="p-3 bg-zinc-900  border border-b-0 border-zinc-800 white rounded-t-md">
+      <div className="border-b border-zinc-800 bg-zinc-900 px-5 py-3">
         <h2>Chat</h2>
+        <p className="mt-1 text-xs text-zinc-500">
+          Demo UI — messages stay in this browser session only.
+        </p>
       </div>
       
       <div className="flex-1 overflow-y-auto p-5 rounded-b-md min-h-full bg-zinc-900 border border-zinc-800">

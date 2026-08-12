@@ -15,7 +15,13 @@ const FeaturedSection = () => {
     }, [dispatch, featuredSong.length]);
 
     if (featuredSongLoading) return <FeaturedSkeleton />;
-    if (error) return <div className="text-red-500 text-center">{error.message || "Something went wrong!"}</div>;
+    if (error) {
+    return (
+      <div className="text-red-400 text-center text-sm">
+        {typeof error === "string" ? error : "Something went wrong loading featured songs."}
+      </div>
+    );
+  }
 
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-4 mb-8">

@@ -14,7 +14,7 @@ const Header = () => {
   return (
     <div className="flex items-center justify-between p-4 sticky top-0 bg-zinc-900/75 backdrop-blur-md z-10 ">
       <div className="flex gap-2 items-center justify-center text-xl  font-semibold">
-        <img src="/spotify.png" alt="Music Player" className="size-9" />
+        <img src="/music-player.png" alt="Music Player" className="size-9" />
         Music Player
       </div>
       <div className="flex items-center gap-4">

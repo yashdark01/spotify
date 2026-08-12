@@ -2,7 +2,7 @@
 
 Audit of breakable functionality in client and server, with a phased fix roadmap.
 
-**Status:** Plan only — implement phase by phase.  
+**Status:** Implemented (Phases 1–4) — Aug 2026  
 **Last reviewed:** Aug 2026
 
 ---

@@ -70,7 +70,6 @@ const playerSlice = createSlice({
       .addCase(fetchSongById.fulfilled, (state, action) => {
         state.currentSong = action.payload;
         state.loading = false;
-        console.log("Fetched song:", action.payload);
       })
 
       .addCase(fetchSongById.rejected, (state, action) => {

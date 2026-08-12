@@ -34,8 +34,8 @@ Full-stack music streaming application with Clerk authentication, MongoDB, Redux
 
 ```
 spotify/                      # repo name (GitHub: yashdark01/spotify)
-├── client/      # React + Vite frontend (port 3000)
-├── server/      # Express API (port 3001)
+├── client/                   # React + Vite frontend (port 3000)
+├── server/                   # Express API (port 3001)
 └── docs/
     ├── SETUP.md
     ├── API.md

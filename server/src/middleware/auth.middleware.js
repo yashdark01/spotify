@@ -3,9 +3,7 @@ import { clerkClient, getAuth, requireAuth } from "@clerk/express";
 
 export const protectRoute = async (req, res, next) => {
     try {
-        const { userId } = getAuth(req);  // Get user ID safely
-
-        console.log('protectRoute middleware called', userId);
+        const { userId } = getAuth(req);
 
         if (!userId) {
             return res.status(401).json({ error: 'Unauthorized - You must be logged in to access this resource' });

@@ -14,9 +14,8 @@ export const fetchAlbums = createAsyncThunk(
 );
 
 export const fetchAlbumById = createAsyncThunk(
-  "albums/fetchAlbumById", 
+  "albums/fetchAlbumById",
   async (id, { rejectWithValue }) => {
-    console.log("fetchAlbumById", id);
     try {
       const response = await axiosInstance.get(`/albums/${id}`);
       return response.data;
@@ -53,13 +52,10 @@ export const fetchSongById = createAsyncThunk(
 export const fetchFeaturedSongs = createAsyncThunk(
   "songs/fetchFeaturedSongs",
   async (_, { rejectWithValue }) => {
-    console.log("fetchFeaturedSongs");
     try {
       const response = await axiosInstance.get("/songs/featured");
-      console.log("response", response.data);
       return response.data;
     } catch (error) {
-      console.log("error :   : : ", error)
       return rejectWithValue(error.response?.data || "Error fetching featured songs");
     }
   }
@@ -168,17 +164,14 @@ const playlistsSlice = createSlice({
       .addCase(fetchFeaturedSongs.pending, (state) => {
         state.featuredSongLoading = true;
         state.error = null;
-        console.log("featured pending");
       })
       .addCase(fetchFeaturedSongs.fulfilled, (state, action) => {
         state.featuredSong = action.payload || [];
         state.featuredSongLoading = false;
-        console.log("featured fulfilled");
       })
       .addCase(fetchFeaturedSongs.rejected, (state, action) => {
         state.featuredSongLoading = false;
         state.error = action.payload;
-        console.log("featured rejected");
       })
       .addCase(fetchMadeForYouSongs.pending, (state) => {
         state.madeForYouSongsLoading = true;
