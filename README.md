@@ -3,7 +3,7 @@
 Full-stack music streaming application with Clerk authentication, MongoDB, Redux Toolkit player state, ShadCN UI, and admin uploads via Cloudinary.
 
 **Author:** [Yash Patidar](https://yashpatidar.vercel.app) · [Portfolio case study](https://yashpatidar.vercel.app/work/music-player)  
-**Repository:** [github.com/yashdark01/spotify](https://github.com/yashdark01/spotify)
+**Repository:** [github.com/yashdark01/Music-Player](https://github.com/yashdark01/Music-Player)
 
 ---
 
@@ -33,7 +33,7 @@ Full-stack music streaming application with Clerk authentication, MongoDB, Redux
 ## Project structure
 
 ```
-spotify/                      # repo name (GitHub: yashdark01/spotify)
+Music-Player/                 # GitHub: yashdark01/Music-Player
 ├── client/                   # React + Vite frontend (port 3000)
 ├── server/                   # Express API (port 3001)
 └── docs/
@@ -47,8 +47,8 @@ spotify/                      # repo name (GitHub: yashdark01/spotify)
 ## Quick start
 
 ```bash
-git clone https://github.com/yashdark01/spotify.git
-cd spotify
+git clone https://github.com/yashdark01/Music-Player.git
+cd Music-Player
 
 # Server
 cd server
@@ -106,5 +106,5 @@ Full setup: [docs/SETUP.md](./docs/SETUP.md)
 ## Related links
 
 - [Portfolio case study](https://yashpatidar.vercel.app/work/music-player)
-- [GitHub](https://github.com/yashdark01/spotify)
+- [GitHub](https://github.com/yashdark01/Music-Player)
 - [LinkedIn](https://linkedin.com/in/yash-patidar-97a8861b3)

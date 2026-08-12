@@ -16,7 +16,7 @@ const Footer = () => {
           <ul className="mt-2 space-y-2 text-gray-400">
             <li>
               <a
-                href="https://github.com/yashdark01/spotify"
+                href="https://github.com/yashdark01/Music-Player"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-white"
